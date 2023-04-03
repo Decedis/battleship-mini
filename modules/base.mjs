@@ -41,10 +41,13 @@ class Board {
         //take in every battleship as an array 
         //append to new `this` value to be used in
         //nodeGuesser 
+        console.log('NODE GATHERER CALLED');
         let occupiedNodes = new Set(); //derived from Battleships
-        for (let i = 0; i < battleshipNodes; i++){
-            for (let j = 0; j < battleshipNodes[i]; j++){
+        for (let i = 0; i <= battleshipNodes; i++){
+            console.log('i value: ', i);
+            for (let j = 0; j <= battleshipNodes[i]; j++){
                 occupiedNodes.add(battleshipNodes[i][j]);
+                console.log('j value: ', j);
             }
         }
         this.occupiedNodes = occupiedNodes;
@@ -96,7 +99,7 @@ class Battleship {
             if((initialNodeIndex + (boardSize * shipSize)) <= board.length){ //vertical placement DOWN
                 for(let i = 0; i < shipSize; i++) {
                     occupiedNodes.push(openNodes[initialNodeIndex + (i * boardSize)]);
-                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
+                    //nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('VERTICAL DOWN TRIGGER');
                 this.nodes = occupiedNodes;
@@ -104,7 +107,7 @@ class Battleship {
             } else if ((initialNodeIndex - (boardSize * shipSize)) >= 0 ) { //vertical placement UP. Check for space
                 for(let i = 0; i < shipSize; i++) {
                     occupiedNodes.push(openNodes[initialNodeIndex - (i * boardSize)]);
-                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
+                    //nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('VERTICAL UP TRIGGER');
                 this.nodes = occupiedNodes;
@@ -120,7 +123,7 @@ class Battleship {
                 for(let i = 0; i < shipSize; i++){
                     occupiedNodes.push(openNodes[initialNodeIndex + i]);
 
-                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
+                    //nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('HORIZONTAL TRIGGER RIGHT');
                 this.nodes = occupiedNodes;
@@ -129,7 +132,7 @@ class Battleship {
                 for(let i = 0; i < shipSize; i++){
                     occupiedNodes.push(openNodes[initialNodeIndex - i]);
 
-                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
+                    //nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('HORIZONTAL TRIGGER LEFT');
                 this.nodes = occupiedNodes;
