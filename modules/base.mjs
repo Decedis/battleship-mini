@@ -49,7 +49,7 @@ class Board {
                 occupiedNodes.add(battleshipNodes[i][j]);
                 console.log('j value: ', j);
             }
-        }
+        } 
         this.occupiedNodes = occupiedNodes;
     }
     nodeGuesser (guess) {
