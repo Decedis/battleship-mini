@@ -38,16 +38,10 @@ class Board {
         this.fullBoard = fullBoard;
     }
     nodeGatherer(battleshipNodes) {
-        //take in every battleship as an array 
-        //append to new `this` value to be used in
-        //nodeGuesser 
-        console.log('NODE GATHERER CALLED');
-        let occupiedNodes = new Set(); //derived from Battleships
-        for (let i = 0; i <= battleshipNodes; i++){
-            console.log('i value: ', i);
-            for (let j = 0; j <= battleshipNodes[i]; j++){
+        let occupiedNodes = new Set; //derived from Battleships
+        for (let i = 0; i < battleshipNodes.length; i++){
+            for (let j = 0; j < battleshipNodes[i].length; j++){
                 occupiedNodes.add(battleshipNodes[i][j]);
-                console.log('j value: ', j);
             }
         } 
         this.occupiedNodes = occupiedNodes;
@@ -57,11 +51,14 @@ class Board {
         //else, update with O
        
 
-        //list or set for misses 
-        //list or set for hits 
+        //list or set for misses
+        //list or set for hits
         //list or set for every guess 
-        if (this.fullBoard.includes(guess)) {
-            
+        let userScore = 0;
+        let guesses = new Set;
+        if (this.occupiedNodes.includes(guess)) {
+            userScore += 1; 
+            guesses.add(guess);
         }
         
         let index = this.fullBoard.indexOf(guess);

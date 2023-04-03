@@ -5,6 +5,7 @@ let battleShip = new Battleship(1, 3, board.size, board.fullBoard);
 let battleShip2 = new Battleship(2, 1, board.size, board.fullBoard);
 
 console.log('Battleship Information: ', battleShip);
+console.log('Battleship Information: ', battleShip2);
 
 console.log('Board Information: ', board);
 board.nodeGatherer([battleShip.nodes, battleShip2.nodes]);
