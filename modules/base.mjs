@@ -14,7 +14,6 @@ class Board {
     constructor(size){
         this.size = size;
         this.boardBuilder(size);
-        this.nodeUpdater();
         this.scoreUpdater();
     }
     boardBuilder (size) {
@@ -23,11 +22,12 @@ class Board {
         //for-loop from the two values above to create new boards ranges
         let alpha = [];
         let numeric = [];
-        let fullBoard = [];
+
+        let fullBoard = []; //uses Alpha and Numeric to build
         for (let i = 0; i < size; i++){
             alpha.push(xAxis[i]);
         }
-        for (let i = 0; i < size; i++){
+        for (let i = 0; i <= size; i++){
             numeric.push(yAxis[i]);
         }
         for (const number of numeric){
@@ -37,10 +37,30 @@ class Board {
         }
         this.fullBoard = fullBoard;
     }
-    nodeUpdater (guess) {
+    nodeGatherer(battleshipNodes) {
+        //take in every battleship as an array 
+        //append to new `this` value to be used in
+        //nodeGuesser 
+        let occupiedNodes = new Set(); //derived from Battleships
+        for (let i = 0; i < battleshipNodes; i++){
+            for (let j = 0; j < battleshipNodes[i]; j++){
+                occupiedNodes.add(battleshipNodes[i][j]);
+            }
+        }
+        this.occupiedNodes = occupiedNodes;
+    }
+    nodeGuesser (guess) {
         //if guess == hit, then update with X
         //else, update with O
-        let occupiedNodes = new Set();
+       
+
+        //list or set for misses 
+        //list or set for hits 
+        //list or set for every guess 
+        if (this.fullBoard.includes(guess)) {
+            
+        }
+        
         let index = this.fullBoard.indexOf(guess);
         return this.fullBoard.splice(index, 1);
     }
@@ -62,11 +82,12 @@ class Battleship {
     //vertical ship => increment + size
     positionSetter(shipSize, boardSize, board){ //board size is derived from the size set by the board => Board.fullBoard
         let orientationRoll = Math.floor(Math.random() * 2);
-        console.log('Orientation Roll: ', orientationRoll );
+        //console.log('Orientation Roll: ', orientationRoll );
         let openNodes = board;
         let initialNodeIndex = Math.floor(Math.random() * openNodes.length);
-        console.log('INITIAL INDEX:', initialNodeIndex);
+        //console.log('INITIAL INDEX:', initialNodeIndex);
         let occupiedNodes = []; //[openNodes[initialNodeIndex]];
+        //occupiedNodes has to be passed back to the original board
 
         this.initialNode = openNodes[initialNodeIndex];
         let numericNode = Number(this.initialNode.slice(0,-1));
@@ -75,12 +96,15 @@ class Battleship {
             if((initialNodeIndex + (boardSize * shipSize)) <= board.length){ //vertical placement DOWN
                 for(let i = 0; i < shipSize; i++) {
                     occupiedNodes.push(openNodes[initialNodeIndex + (i * boardSize)]);
+                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('VERTICAL DOWN TRIGGER');
                 this.nodes = occupiedNodes;
+
             } else if ((initialNodeIndex - (boardSize * shipSize)) >= 0 ) { //vertical placement UP. Check for space
                 for(let i = 0; i < shipSize; i++) {
                     occupiedNodes.push(openNodes[initialNodeIndex - (i * boardSize)]);
+                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('VERTICAL UP TRIGGER');
                 this.nodes = occupiedNodes;
@@ -95,6 +119,8 @@ class Battleship {
             if(condition > 0) { //horizontal right
                 for(let i = 0; i < shipSize; i++){
                     occupiedNodes.push(openNodes[initialNodeIndex + i]);
+
+                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('HORIZONTAL TRIGGER RIGHT');
                 this.nodes = occupiedNodes;
@@ -102,6 +128,8 @@ class Battleship {
             else if(condition < 0 ) { //horizontal left IS NOT TRIGGERING
                 for(let i = 0; i < shipSize; i++){
                     occupiedNodes.push(openNodes[initialNodeIndex - i]);
+
+                    nodeTracker.add(openNodes[initialNodeIndex + (i * boardSize)]);
                 }
                 console.log('HORIZONTAL TRIGGER LEFT');
                 this.nodes = occupiedNodes;
