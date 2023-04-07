@@ -39,18 +39,13 @@ class Board {
     }
     nodeGatherer(battleshipNodes) {
         let occupiedNodes = new Set; //derived from Battleships
-        // for (let i = 0; i < battleshipNodes.length; i++){
-        //     for (let j = 0; j < battleshipNodes[i].length; j++){
-        //         occupiedNodes.add(battleshipNodes[i][j]);
-        //     }
-        // } 
         for (let i = 0; i < battleshipNodes.length; i++){
             occupiedNodes.add(battleshipNodes[i]);
         } 
-        // this.occupiedNodes = occupiedNodes;
         this.occupiedNodes = occupiedNodes;
     }
-    nodeGuesser (guess) {
+    nodeGuesser(guess) {
+        //NOT FINISHED
         //if guess == hit, then update with X
         //else, update with O
        
@@ -68,7 +63,8 @@ class Board {
         let index = this.fullBoard.indexOf(guess);
         return this.fullBoard.splice(index, 1);
     }
-    scoreUpdater(guess){
+    scoreUpdater(guess) {
+        //NOT FINISHED
         let score = 0;
         return score;
     }
