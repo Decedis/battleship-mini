@@ -15,6 +15,7 @@ class Board {
         this.size = size;
         this.boardBuilder(size);
         this.scoreUpdater();
+        this.occupiedNodes = new Set;
     }
     boardBuilder (size) {
         let xAxis = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; //10 values 0-9 index
@@ -38,11 +39,10 @@ class Board {
         this.fullBoard = fullBoard;
     }
     nodeGatherer(battleshipNodes) {
-        let occupiedNodes = new Set; //derived from Battleships
+        //let occupiedNodes = new Set; //derived from Battleships
         for (let i = 0; i < battleshipNodes.length; i++){
-            occupiedNodes.add(battleshipNodes[i]);
-        } 
-        this.occupiedNodes = occupiedNodes;
+            this.occupiedNodes.add(battleshipNodes[i]);
+        }         
     }
     nodeGuesser(guess) {
         //NOT FINISHED
@@ -131,7 +131,7 @@ class Battleship {
                     for(let i = 0; i < shipSize; i++){
                         occupiedNodes.push(openNodes[initialNodeIndex + i]);
                     }
-                    console.log('HORIZONTAL TRIGGER RIGHT');
+                    //console.log('HORIZONTAL TRIGGER RIGHT');
                     this.nodes = occupiedNodes;
                     this.board.nodeGatherer(occupiedNodes);
                 }
