@@ -8,6 +8,7 @@ let board = new Board(10);
 populateBoard(board);
 
 let prompt = readlineSync.question('Hello, is this thing on?: ');
+console.log('Something different');
 console.log(prompt);
 
 
