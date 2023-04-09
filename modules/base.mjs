@@ -14,8 +14,7 @@ class Board {
     constructor(size){
         this.size = size;
         this.boardBuilder(size);
-        this.scoreUpdater();
-        //Sets 
+        
         this.occupiedNodes = new Set;
         this.guesses = new Set;
         this.score = Number;
