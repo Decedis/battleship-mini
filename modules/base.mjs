@@ -58,28 +58,22 @@ class Board {
         //list or set for hits
         //list or set for every guess 
         if (this.occupiedNodes.includes(guess)) {
-            userScore += 1; 
+            console.log('You made a hit!');
+            this.score += 1; 
             guesses.add(guess);
         }
-        
-        let index = this.fullBoard.indexOf(guess);
-        return this.fullBoard.splice(index, 1);
-    }
-    scoreUpdater(guess) {
-        //NOT FINISHED
-        let score = 0;
-        return score;
+        if (this.guesses.includes(guess)) {
+            console.log('This has already been guessed. Try again.');
+        }
     }
 }
 
 class Battleship {
     constructor(ID, shipSize, board) {
-        this.ID = ID; //track ship amounts
+        this.ID = ID; //track the amount of ships. Not strictly necessary
         this.board = board; //get the fullBoard
         this.sizeValidator(shipSize); 
         this.positionSetter(shipSize, board) //track ship nodes. BoardSize is a number, board is a property
-
-        
     }
     sizeValidator(shipSize) {
         if (shipSize > 0) {
@@ -258,8 +252,11 @@ function populateBoard(board) {
             console.log('Five ships are on the board');
             break;
         }
-        default:
+        default: {
+            console.log('Invalid Size');
+            let battleShipSizeTwo, battleShipSizeThree, battleShipSizeThree2, battleShipSizeFour, battleShipSizeFive = null;
             break;
+        }
     }
 }
 
