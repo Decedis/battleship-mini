@@ -3,13 +3,43 @@ import readlineSync from 'readline-sync';
 //local import
 import { Board, Battleship, populateBoard } from './modules/base.mjs';
 
-let board = new Board(10);
 
+let prompt = readlineSync.keyIn('Press any key to start the game...');
+let boardSize = readlineSync.questionInt('How big do you want the board to be? It can be between 1 and 10: ');
+console.log('Board size: ', boardSize);
+let board = new Board(boardSize);
 populateBoard(board);
-
-let prompt = readlineSync.question('Hello, is this thing on?: ');
-console.log('Something different');
-console.log(prompt);
+    
+while (prompt) {
+    if (board.size > 0 && board.size <= 10) {
+        console.log(board.fullBoard);
+    }
+    if (board.occupiedNodes.size > 0) {
+        let guess = readlineSync.question('Guess a battleship node location: ');
+        board.nodeGuesser(guess);
+        if (board.score > 0) {
+            console.log('Your score is: ', board.score);
+        }
+        console.log('Your hits are: ', board.hits);
+        console.log('Your guesses are: ', board.guesses);
+        console.log('Occupied Nodes: ', board.occupiedNodes.size);
+    }
+    else if (board.occupiedNodes.size == 0) {
+        let exit = readlineSync.question('Would you like to play again? Y/N: ');
+        if (exit.toUpperCase() === 'Y') {
+            console.log('Lets keep playing');
+            boardSize = readlineSync.questionInt('How big do you want the board to be? It can be between 1 and 10: ');
+            board = new Board(boardSize);
+            populateBoard(board);
+        } else if (exit.toUpperCase() === 'N') {
+            console.log('Exiting game');
+            prompt = undefined;
+        } else {
+            console.log('Invalid input.');
+        }
+    }
+}
+console.log('Thanks for playing.');
 
 
 

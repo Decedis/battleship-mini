@@ -16,9 +16,9 @@ class Board {
         this.boardBuilder(size);
         
         this.occupiedNodes = new Set;
-        this.guesses = new Set;
-        this.score = Number;
-
+        this.hits = new Set;
+        this.guesses = new Array;
+        this.score = new Number;
     }
     boardBuilder (size) {
         let xAxis = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; //10 values 0-9 index
@@ -42,28 +42,27 @@ class Board {
         this.fullBoard = fullBoard;
     }
     nodeGatherer(battleshipNodes) {
-        //let occupiedNodes = new Set; //derived from Battleships
         for (let i = 0; i < battleshipNodes.length; i++){
             this.occupiedNodes.add(battleshipNodes[i]);
         }         
     }
     nodeGuesser(guess) {
-        //NOT FINISHED
-        //if guess == hit, then update with X
-        //else, update with O
-       
-
-        //list or set for misses
-        //list or set for hits
-        //list or set for every guess 
-        if (this.occupiedNodes.includes(guess)) {
+        if (this.occupiedNodes.has(guess)) {
             console.log('You made a hit!');
+
+            this.hits.add(guess);
+            this.occupiedNodes.delete(guess);
             this.score += 1; 
-            guesses.add(guess);
+
+            this.guesses.push(guess);
+        } else if (!this.occupiedNodes.has(guess)) {
+            this.guesses.push(guess);
         }
-        if (this.guesses.includes(guess)) {
+        if (this.guesses.filter(value => value == guess).length > 1) {
             console.log('This has already been guessed. Try again.');
-        }
+        } 
+        //guesses will keep building up. 
+        //will fix in later iteration 
     }
 }
 
@@ -252,7 +251,7 @@ function populateBoard(board) {
             break;
         }
         default: {
-            console.log('Invalid Size');
+            console.log('Invalid Board Size. No ships placed');
             let battleShipSizeTwo, battleShipSizeThree, battleShipSizeThree2, battleShipSizeFour, battleShipSizeFive = null;
             break;
         }
