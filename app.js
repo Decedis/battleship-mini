@@ -21,11 +21,11 @@ while (prompt) {
             console.log('Your score is: ', board.score);
         }
         console.log('Your hits are: ', board.hits);
-        console.log('Your guesses are: ', board.guesses);
+        //console.log('Your guesses are: ', board.guesses);
         console.log('Occupied Nodes: ', board.occupiedNodes.size);
     }
     else if (board.occupiedNodes.size == 0) {
-        let exit = readlineSync.question('Would you like to play again? Y/N: ');
+        let exit = readlineSync.question('You have destroyed all battleships. Would you like to play again? Y/N: ');
         if (exit.toUpperCase() === 'Y') {
             console.log('Lets keep playing');
             boardSize = readlineSync.questionInt('How big do you want the board to be? It can be between 1 and 10: ');
