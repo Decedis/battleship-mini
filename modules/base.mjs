@@ -248,6 +248,16 @@ function populateBoard(board) {
             let battleShipSizeFour = new Battleship(4, 4, board);
             let battleShipSizeFive = new Battleship(5, 5, board);
             console.log('Five ships are on the board');
+
+            //test code 
+            console.log('Battleship info: Two, ', battleShipSizeTwo.nodes);
+            console.log('Battleship info: Three', battleShipSizeThree.nodes);
+            console.log('Battleship info: Three', battleShipSizeThree2.nodes);
+            console.log('Battleship info: Four', battleShipSizeFour.nodes);
+            console.log('Battleship info: Five', battleShipSizeFive.nodes);
+
+            console.log(`Occupied nodes: ${board.occupiedNodes.size}. 
+                        The occupied nodes are ${board.occupiedNodes}.`)
             break;
         }
         default: {

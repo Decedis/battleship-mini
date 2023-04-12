@@ -11,6 +11,7 @@ let board = new Board(boardSize);
 populateBoard(board);
     
 while (prompt) {
+    console.log('Occupied nodes:size =>', board.occupiedNodes, board.occupiedNodes.size);
     if (board.size > 0 && board.size <= 10) {
         console.log(board.fullBoard);
     }
@@ -21,9 +22,12 @@ while (prompt) {
             console.log('Your score is: ', board.score);
         }
         console.log('Your hits are: ', board.hits);
-        //console.log('Your guesses are: ', board.guesses);
+        console.log('Your guesses are: ', board.guesses);
         console.log('Occupied Nodes: ', board.occupiedNodes.size);
     }
+
+    
+
     else if (board.occupiedNodes.size == 0) {
         let exit = readlineSync.question('You have destroyed all battleships. Would you like to play again? Y/N: ');
         if (exit.toUpperCase() === 'Y') {
@@ -38,6 +42,7 @@ while (prompt) {
             console.log('Invalid input.');
         }
     }
+    
 }
 console.log('Thanks for playing.');
 
